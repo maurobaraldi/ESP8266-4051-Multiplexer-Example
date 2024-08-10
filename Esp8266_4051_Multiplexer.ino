@@ -10,10 +10,10 @@
  D4    ->   S0 (A)
  D3    ->   S1 (B)
  D2    ->   S2 (C)
- A0    ->   Common
+ A0    ->   Common (COM OUT/IN)
  3.3v  ->   VCC
  G     ->   GND
- G     ->   Inhibit
+ G     ->   Inhibit (E̅)
  G     ->   VEE  
  
  4051 Option pins are then wired to whatever Analog sensors required
@@ -33,9 +33,10 @@
 
 void setup() {
   //Deifne output pins for Mux
+  Serial.begin(115200);
   pinMode(MUX_A, OUTPUT);
   pinMode(MUX_B, OUTPUT);     
-  pinMode(MUX_C, OUTPUT);     
+  pinMode(MUX_C, OUTPUT);
 }
 
 void changeMux(int c, int b, int a) {
@@ -49,26 +50,43 @@ void loop() {
   
   changeMux(LOW, LOW, LOW);
   value = analogRead(ANALOG_INPUT); //Value of the sensor connected Option 0 pin of Mux
-  
+  Serial.print("Pin 0 value: ");
+  Serial.println(value);
+
   changeMux(LOW, LOW, HIGH);
   value = analogRead(ANALOG_INPUT); //Value of the sensor connected Option 1 pin of Mux
-  
+  Serial.print("Pin 1 value: ");
+  Serial.println(value);
+ 
   changeMux(LOW, HIGH, LOW);
   value = analogRead(ANALOG_INPUT); //Value of the sensor connected Option 2 pin of Mux
-
+  Serial.print("Pin 2 value: ");
+  Serial.println(value);
+ 
   changeMux(LOW, HIGH, HIGH);
   value = analogRead(ANALOG_INPUT); //Value of the sensor connected Option 3 pin of Mux
-
+  Serial.print("Pin 3 value: ");
+  Serial.println(value);
+ 
   changeMux(HIGH, LOW, LOW);
   value = analogRead(ANALOG_INPUT); //Value of the sensor connected Option 4 pin of Mux
-
+  Serial.print("Pin 4 value: ");
+  Serial.println(value);
+ 
   changeMux(HIGH, LOW, HIGH);
   value = analogRead(ANALOG_INPUT); //Value of the sensor connected Option 5 pin of Mux
-
+  Serial.print("Pin 5 value: ");
+  Serial.println(value);
+ 
   changeMux(HIGH, HIGH, LOW);
   value = analogRead(ANALOG_INPUT); //Value of the sensor connected Option 6 pin of Mux
-
+  Serial.print("Pin 6 value: ");
+  Serial.println(value);
+ 
   changeMux(HIGH, HIGH, HIGH);
   value = analogRead(ANALOG_INPUT); //Value of the sensor connected Option 7 pin of Mux
-  
+  Serial.print("Pin 7 value: ");
+  Serial.println(value);
+
+  delay(1000);
 }
